@@ -69,7 +69,8 @@ GameManager.prototype.addStartTiles = function () {
 GameManager.prototype.addRandomTile = function () {
   if (this.grid.cellsAvailable()) {
     var value = Math.random() < 0.9 ? 2 : 4;
-    var tile = new Tile(this.grid.randomAvailableCell(), value);
+    var who = Math.random() < 0.5 ? "Wei" : "Pan";
+    var tile = new Tile(this.grid.randomAvailableCell(), value, who);
 
     this.grid.insertTile(tile);
   }
@@ -153,8 +154,8 @@ GameManager.prototype.move = function (direction) {
         var next      = self.grid.cellContent(positions.next);
 
         // Only one merger per row traversal?
-        if (next && next.value === tile.value && !next.mergedFrom) {
-          var merged = new Tile(positions.next, tile.value * 2);
+        if (next && next.value === tile.value && tile.value <= 16 && next.who === tile.who && !next.mergedFrom) {
+          var merged = new Tile(positions.next, tile.value * 2, tile.who);
           merged.mergedFrom = [tile, next];
 
           self.grid.insertTile(merged);
@@ -167,7 +168,20 @@ GameManager.prototype.move = function (direction) {
           self.score += merged.value;
 
           // The mighty 2048 tile
-          if (merged.value === 2048) self.won = true;
+          // if (merged.value === 2048) self.won = true;
+        } else if (next && next.value === tile.value && tile.value === 32 && next.who != tile.who && !next.mergedFrom) {
+          var merged = new Tile(positions.next, tile.value * 2, "End");
+          merged.mergedFrom = [tile, next];
+
+          self.grid.insertTile(merged);
+          self.grid.removeTile(tile);
+
+          // Converge the two tiles' positions
+          tile.updatePosition(positions.next);
+
+          // Update the score
+          self.score += merged.value;
+          self.won = true;
         } else {
           self.moveTile(tile, positions.farthest);
         }
@@ -256,7 +270,7 @@ GameManager.prototype.tileMatchesAvailable = function () {
 
           var other  = self.grid.cellContent(cell);
 
-          if (other && other.value === tile.value) {
+          if (other && other.value === tile.value && other.who === tile.who) {
             return true; // These two tiles can be merged
           }
         }
