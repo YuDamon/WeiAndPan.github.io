@@ -137,6 +137,48 @@ hr {
 
   100% {
     opacity: 1; } }
+
+.game-container {
+  margin-top: 40px;
+  position: relative;
+  padding: 15px;
+  cursor: default;
+  -webkit-touch-callout: none;
+  -ms-touch-callout: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -ms-touch-action: none;
+  touch-action: none;
+  background: #bbada0;
+  border-radius: 6px;
+  width: 743px;
+  height: 743px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box; }
+  .game-container .letter {
+    display: none;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: rgba(238, 228, 218, 0.5);
+    z-index: 100; }
+	.game-container .letter p {
+      font-size: 30px;
+      font-weight: bold;
+      height: 30px;
+      line-height: 30px;
+      margin-top: 60px;
+      font-family:times;
+      font-style:italic; }
+	  .game-container .letter.game-won {
+      background: rgba(254, 109, 232, 0.4);
+      color: #f9f6f2;
+      display: block;}
+	
 .game-container {
   margin-top: 40px;
   position: relative;
@@ -191,12 +233,12 @@ hr {
       height: 40px;
       line-height: 42px;
       margin-left: 9px; }
-      .game-container .game-message a.keep-playing-button {
+      .game-container .game-message a.letter-button {
         display: none; }
     .game-container .game-message.game-won {
-      background: rgba(237, 194, 46, 0.5);
+      background: rgba(254, 109, 232, 0.4);
       color: #f9f6f2; }
-      .game-container .game-message.game-won a.keep-playing-button {
+      .game-container .game-message.game-won a.letter-button {
         display: inline-block; }
     .game-container .game-message.game-won, .game-container .game-message.game-over {
       display: block; }
@@ -229,6 +271,10 @@ hr {
   z-index: 2; }
 
 .tile, .tile .tile-inner {
+  width: 107px;
+  height: 107px;
+  line-height: 107px; }
+.tile, .tile .tile-inner2 {
   width: 107px;
   height: 107px;
   line-height: 107px; }
@@ -430,22 +476,28 @@ hr {
     font-size: 25px; }
   .tile.tile-2 .tile-inner {
     background: #eee4da;
+    background: url('../tile-sets/Wei/CaiMo2.jpg');
     box-shadow: 0 0 30px 10px rgba(243, 215, 116, 0), inset 0 0 0 1px rgba(255, 255, 255, 0); }
   .tile.tile-4 .tile-inner {
     background: #ede0c8;
+    background: url('../tile-sets/Wei/No2.jpg');
     box-shadow: 0 0 30px 10px rgba(243, 215, 116, 0), inset 0 0 0 1px rgba(255, 255, 255, 0); }
   .tile.tile-8 .tile-inner {
     color: #f9f6f2;
-    background: #f2b179; }
+    background: #f2b179;
+    background: url('../tile-sets/Wei/sjtu.jpg'); }
   .tile.tile-16 .tile-inner {
     color: #f9f6f2;
-    background: #f59563; }
+    background: #f59563;
+    background: url('../tile-sets/Wei/Graduate.jpg'); }
   .tile.tile-32 .tile-inner {
     color: #f9f6f2;
-    background: #f67c5f; }
+    background: #f67c5f;
+    background: url('../tile-sets/Wei/Uchicago.jpg'); }
   .tile.tile-64 .tile-inner {
     color: #f9f6f2;
-    background: #f65e3b; }
+    background: #f65e3b;
+    background: url('../tile-sets/happyEnding.jpg'); }
   .tile.tile-128 .tile-inner {
     color: #f9f6f2;
     background: #edcf72;
@@ -493,6 +545,92 @@ hr {
     @media screen and (max-width: 520px) {
       .tile.tile-super .tile-inner {
         font-size: 10px; } }
+.tile {
+  position: absolute;
+  -webkit-transition: 100ms ease-in-out;
+  -moz-transition: 100ms ease-in-out;
+  transition: 100ms ease-in-out;
+  -webkit-transition-property: -webkit-transform;
+  -moz-transition-property: -moz-transform;
+  transition-property: transform; }
+  .tile .tile-inner2 {
+    border-radius: 3px;
+    background: #eee4da;
+    text-align: center;
+    font-weight: bold;
+    z-index: 10;
+    font-size: 25px; }
+  .tile.tile-2 .tile-inner2 {
+    background: #eee4da;
+    background: url('../tile-sets/Pan/caimo.jpg');
+    box-shadow: 0 0 30px 10px rgba(243, 215, 116, 0), inset 0 0 0 1px rgba(255, 255, 255, 0); }
+  .tile.tile-4 .tile-inner2 {
+    background: #ede0c8;
+    background: url('../tile-sets/Pan/No2.jpg');
+    box-shadow: 0 0 30px 10px rgba(243, 215, 116, 0), inset 0 0 0 1px rgba(255, 255, 255, 0); }
+  .tile.tile-8 .tile-inner2 {
+    color: #f9f6f2;
+    background: #f2b179;
+    background: url('../tile-sets/Pan/tsinghua.jpg'); }
+  .tile.tile-16 .tile-inner2 {
+    color: #f9f6f2;
+    background: #f59563;
+    background: url('../tile-sets/Pan/graduate2.jpg'); }
+  .tile.tile-32 .tile-inner2 {
+    color: #f9f6f2;
+    background: #f67c5f;
+    background: url('../tile-sets/Pan/CUHK.jpg'); }
+  .tile.tile-64 .tile-inner2 {
+    color: #f9f6f2;
+    background: #f65e3b;
+    background: url('../tile-sets/happyEnding.jpg'); }
+  .tile.tile-128 .tile-inner2 {
+    color: #f9f6f2;
+    background: #edcf72;
+    box-shadow: 0 0 30px 10px rgba(243, 215, 116, 0.2381), inset 0 0 0 1px rgba(255, 255, 255, 0.14286);
+    font-size: 45px; }
+    @media screen and (max-width: 520px) {
+      .tile.tile-128 .tile-inner2 {
+        font-size: 25px; } }
+  .tile.tile-256 .tile-inner2 {
+    color: #f9f6f2;
+    background: #edcc61;
+    box-shadow: 0 0 30px 10px rgba(243, 215, 116, 0.31746), inset 0 0 0 1px rgba(255, 255, 255, 0.19048);
+    font-size: 45px; }
+    @media screen and (max-width: 520px) {
+      .tile.tile-256 .tile-inner2 {
+        font-size: 25px; } }
+  .tile.tile-512 .tile-inner2 {
+    color: #f9f6f2;
+    background: #edc850;
+    box-shadow: 0 0 30px 10px rgba(243, 215, 116, 0.39683), inset 0 0 0 1px rgba(255, 255, 255, 0.2381);
+    font-size: 45px; }
+    @media screen and (max-width: 520px) {
+      .tile.tile-512 .tile-inner2 {
+        font-size: 25px; } }
+  .tile.tile-1024 .tile-inner2 {
+    color: #f9f6f2;
+    background: #edc53f;
+    box-shadow: 0 0 30px 10px rgba(243, 215, 116, 0.47619), inset 0 0 0 1px rgba(255, 255, 255, 0.28571);
+    font-size: 35px; }
+    @media screen and (max-width: 520px) {
+      .tile.tile-1024 .tile-inner2 {
+        font-size: 15px; } }
+  .tile.tile-2048 .tile-inner2 {
+    color: #f9f6f2;
+    background: #edc22e;
+    box-shadow: 0 0 30px 10px rgba(243, 215, 116, 0.55556), inset 0 0 0 1px rgba(255, 255, 255, 0.33333);
+    font-size: 35px; }
+    @media screen and (max-width: 520px) {
+      .tile.tile-2048 .tile-inner2 {
+        font-size: 15px; } }
+  .tile.tile-super .tile-inner2 {
+    color: #f9f6f2;
+    background: #3c3a32;
+    font-size: 30px; }
+    @media screen and (max-width: 520px) {
+      .tile.tile-super .tile-inner2 {
+        font-size: 10px; } }
 
 @-webkit-keyframes appear {
   0% {
@@ -537,6 +675,13 @@ hr {
     -ms-transform: scale(1);
     transform: scale(1); } }
 .tile-new .tile-inner {
+  -webkit-animation: appear 200ms ease 100ms;
+  -moz-animation: appear 200ms ease 100ms;
+  animation: appear 200ms ease 100ms;
+  -webkit-animation-fill-mode: backwards;
+  -moz-animation-fill-mode: backwards;
+  animation-fill-mode: backwards; }
+.tile-new .tile-inner2 {
   -webkit-animation: appear 200ms ease 100ms;
   -moz-animation: appear 200ms ease 100ms;
   animation: appear 200ms ease 100ms;
@@ -599,6 +744,14 @@ hr {
     -ms-transform: scale(1);
     transform: scale(1); } }
 .tile-merged .tile-inner {
+  z-index: 20;
+  -webkit-animation: pop 200ms ease 100ms;
+  -moz-animation: pop 200ms ease 100ms;
+  animation: pop 200ms ease 100ms;
+  -webkit-animation-fill-mode: backwards;
+  -moz-animation-fill-mode: backwards;
+  animation-fill-mode: backwards; }
+.tile-merged .tile-inner2 {
   z-index: 20;
   -webkit-animation: pop 200ms ease 100ms;
   -moz-animation: pop 200ms ease 100ms;
@@ -724,12 +877,12 @@ hr {
         height: 40px;
         line-height: 42px;
         margin-left: 9px; }
-        .game-container .game-message a.keep-playing-button {
+        .game-container .game-message a.letter-button {
           display: none; }
       .game-container .game-message.game-won {
         background: rgba(237, 194, 46, 0.5);
         color: #f9f6f2; }
-        .game-container .game-message.game-won a.keep-playing-button {
+        .game-container .game-message.game-won a.letter-button {
           display: inline-block; }
       .game-container .game-message.game-won, .game-container .game-message.game-over {
         display: block; }

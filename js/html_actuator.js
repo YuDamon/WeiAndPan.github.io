@@ -3,6 +3,7 @@ function HTMLActuator() {
   this.scoreContainer   = document.querySelector(".score-container");
   this.bestContainer    = document.querySelector(".best-container");
   this.messageContainer = document.querySelector(".game-message");
+  this.letterContainer  = document.querySelector(".letter");
 
   this.score = 0;
 }
@@ -38,6 +39,7 @@ HTMLActuator.prototype.actuate = function (grid, metadata) {
 // Continues the game (both restart and keep playing)
 HTMLActuator.prototype.continueGame = function () {
   this.clearMessage();
+  this.clearLetter();
 };
 
 HTMLActuator.prototype.clearContainer = function (container) {
@@ -60,9 +62,11 @@ HTMLActuator.prototype.addTile = function (tile) {
   if (tile.value > 2048) classes.push("tile-super");
 
   this.applyClasses(wrapper, classes);
-
-  inner.classList.add("tile-inner");
-  inner.textContent = tile.value+tile.who;
+  if (tile.who === "Wei")
+    inner.classList.add("tile-inner");
+  else
+    inner.classList.add("tile-inner2");
+  //inner.textContent = tile.value+tile.who;
 
   if (tile.previousPosition) {
     // Make sure that the tile gets rendered in the previous position first
@@ -136,4 +140,33 @@ HTMLActuator.prototype.clearMessage = function () {
   // IE only takes one value to remove at a time.
   this.messageContainer.classList.remove("game-won");
   this.messageContainer.classList.remove("game-over");
+};
+
+var content = "letter content lalalalalalalalaaaaaaa.  bbbbbbbbbbbbbbbb cccccccccccccc dddddddddddd eeeeeeeeee ffffffffffff gggggggggg hhhhhhhh";
+var count = 0;
+var progress = 1;
+var ele = document.getElementById("letter");
+
+HTMLActuator.prototype.showLetter = function () {
+  var self = this;
+  this.clearMessage();
+  this.letterContainer.classList.add("game-won");
+  requestAnimationFrame(Letter);
+};
+
+Letter = function () {
+  count += 1;
+  if (count >= 8) {
+    progress += 1;
+    count = 0;
+  }
+  ele.innerHTML = content.substr(0,progress);
+  if (progress < content.length) {
+    requestAnimationFrame(Letter);
+  }
+};
+
+HTMLActuator.prototype.clearLetter = function () {
+  // IE only takes one value to remove at a time.
+  this.letterContainer.classList.remove("game-won");
 };

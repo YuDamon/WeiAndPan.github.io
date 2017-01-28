@@ -9,7 +9,7 @@ function GameManager(size, InputManager, Actuator, StorageManager) {
 
   this.inputManager.on("move", this.move.bind(this));
   this.inputManager.on("restart", this.restart.bind(this));
-  this.inputManager.on("keepPlaying", this.keepPlaying.bind(this));
+  this.inputManager.on("letter", this.letter.bind(this));
 
   this.setup();
 }
@@ -21,15 +21,15 @@ GameManager.prototype.restart = function () {
   this.setup();
 };
 
-// Keep playing after winning (allows going over 2048)
-GameManager.prototype.keepPlaying = function () {
-  this.keepPlaying = true;
-  this.actuator.continueGame(); // Clear the game won/lost message
+// Show letter
+GameManager.prototype.letter = function () {
+  this.letter = true;
+  this.actuator.showLetter();
 };
 
-// Return true if the game is lost, or has won and the user hasn't kept playing
+// Return true if the game is lost
 GameManager.prototype.isGameTerminated = function () {
-  return this.over || (this.won && !this.keepPlaying);
+  return this.over || this.won;
 };
 
 // Set up the game
@@ -43,13 +43,13 @@ GameManager.prototype.setup = function () {
     this.score       = previousState.score;
     this.over        = previousState.over;
     this.won         = previousState.won;
-    this.keepPlaying = previousState.keepPlaying;
+    this.letter = previousState.letter;
   } else {
     this.grid        = new Grid(this.size);
     this.score       = 0;
     this.over        = false;
     this.won         = false;
-    this.keepPlaying = false;
+    this.letter = false;
 
     // Add the initial tiles
     this.addStartTiles();
@@ -109,7 +109,7 @@ GameManager.prototype.serialize = function () {
     score:       this.score,
     over:        this.over,
     won:         this.won,
-    keepPlaying: this.keepPlaying
+    letter:      this.letter
   };
 };
 
@@ -159,7 +159,7 @@ GameManager.prototype.move = function (direction) {
         var next      = self.grid.cellContent(positions.next);
 
         // Only one merger per row traversal?
-        if (next && next.value === tile.value && tile.value <= 16 && next.who === tile.who && !next.mergedFrom) {
+        if (next && next.value === tile.value && tile.value <= 2 && next.who === tile.who && !next.mergedFrom) {
           var merged = new Tile(positions.next, tile.value * 2, tile.who);
           merged.mergedFrom = [tile, next];
 
@@ -174,7 +174,7 @@ GameManager.prototype.move = function (direction) {
 
           // The mighty 2048 tile
           // if (merged.value === 2048) self.won = true;
-        } else if (next && next.value === tile.value && tile.value === 32 && next.who != tile.who && !next.mergedFrom) {
+        } else if (next && next.value === tile.value && tile.value === 4 && next.who != tile.who && !next.mergedFrom) {
           var merged = new Tile(positions.next, tile.value * 2, "End");
           merged.mergedFrom = [tile, next];
 
@@ -275,8 +275,10 @@ GameManager.prototype.tileMatchesAvailable = function () {
 
           var other  = self.grid.cellContent(cell);
 
-          if (other && other.value === tile.value && other.who === tile.who) {
+          if (other && other.value === tile.value && other.who === tile.who && other.value <= 16) {
             return true; // These two tiles can be merged
+          } else if (other && other.value === tile.value && tile.value === 32 && other.who != tile.who ) {
+            return true;
           }
         }
       }
