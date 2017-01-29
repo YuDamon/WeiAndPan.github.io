@@ -2,7 +2,7 @@
 html, body {
   margin: 0;
   padding: 0;
-  background: #faf8ef;
+  background: rgba(255, 82, 167, 0.11);
   color: #776e65;
   font-family: "Clear Sans", "Helvetica Neue", Arial, sans-serif;
   font-size: 18px; }
@@ -158,6 +158,8 @@ hr {
   -moz-box-sizing: border-box;
   box-sizing: border-box; }
   .game-container .letter {
+	padding-left:42px;
+	padding-right:22px;
     display: none;
     position: absolute;
     top: 0;
@@ -169,16 +171,14 @@ hr {
 	.game-container .letter p {
       font-size: 30px;
       font-weight: bold;
-      height: 30px;
-      line-height: 30px;
-      margin-top: 60px;
+      line-height: 35px;
       font-family:times;
       font-style:italic; }
 	  .game-container .letter.game-won {
-      background: rgba(254, 109, 232, 0.4);
+      background: rgba(254, 109, 232, 0.5);
       color: #f9f6f2;
       display: block;}
-	
+
 .game-container {
   margin-top: 40px;
   position: relative;

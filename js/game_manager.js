@@ -4,7 +4,7 @@ function GameManager(size, InputManager, Actuator, StorageManager) {
   this.storageManager = new StorageManager;
   this.actuator       = new Actuator;
 
-  this.startTiles     = 2;
+  this.startTiles     = 1;
   this.count          = 1;
 
   this.inputManager.on("move", this.move.bind(this));
@@ -159,7 +159,7 @@ GameManager.prototype.move = function (direction) {
         var next      = self.grid.cellContent(positions.next);
 
         // Only one merger per row traversal?
-        if (next && next.value === tile.value && tile.value <= 2 && next.who === tile.who && !next.mergedFrom) {
+        if (next && next.value === tile.value && tile.value <= 16 && next.who === tile.who && !next.mergedFrom) {
           var merged = new Tile(positions.next, tile.value * 2, tile.who);
           merged.mergedFrom = [tile, next];
 
@@ -174,7 +174,7 @@ GameManager.prototype.move = function (direction) {
 
           // The mighty 2048 tile
           // if (merged.value === 2048) self.won = true;
-        } else if (next && next.value === tile.value && tile.value === 4 && next.who != tile.who && !next.mergedFrom) {
+        } else if (next && next.value === tile.value && tile.value === 32 && next.who != tile.who && !next.mergedFrom) {
           var merged = new Tile(positions.next, tile.value * 2, "End");
           merged.mergedFrom = [tile, next];
 

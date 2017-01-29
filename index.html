@@ -9,7 +9,8 @@
   <link rel="apple-touch-icon" href="meta/apple-touch-icon.png">
   <link rel="apple-touch-startup-image" href="meta/apple-touch-startup-image-640x1096.png" media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2)"> <!-- iPhone 5+ -->
   <link rel="apple-touch-startup-image" href="meta/apple-touch-startup-image-640x920.png"  media="(device-width: 320px) and (device-height: 480px) and (-webkit-device-pixel-ratio: 2)"> <!-- iPhone, retina -->
-  <!-- <embed src="./music/RiverFlowsInYou.mp3" hidden="true" autostart="true" loop="true">  -->
+  <embed src="./music/bgm.mp3" hidden="true" autostart="true" loop="true">
+  <embed src="./music/bgm.ogg" hidden="true" autostart="true" loop="true">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
 
@@ -36,13 +37,18 @@
 	  <div class="game-message">
         <p></p>
         <div class="lower">
-	      <a class="letter-button">Read the letter from Xingang</a>
+	      <a class="letter-button">The letter from Xingang</a>
           <a class="retry-button">Try again</a>
         </div>
       </div>
 
-      <div class="letter">
-		<p id="letter"></p>
+    <div class="letter">
+	<p id="letter1" style="text-indent:1em;margin-top: 80px;"></p>
+    <p id="letter2" style="text-indent:1em;"></p>
+    <p id="letter3" style="text-indent:1em;"></p>
+    <p id="letter4" style="text-indent:1em;"></p>
+    <p id="letter5" style="text-indent:18em;"></p>
+    <p id="letter6" style="text-indent:18em;"></p>
 	  </div>
 
       <div class="grid-container">
@@ -102,15 +108,11 @@
     </div>
 
     <p class="game-explanation">
-      <strong class="important">How to play:</strong> Use your <strong>arrow keys</strong> to move the tiles. When two tiles with the same number touch, they <strong>merge into one!</strong>
+      <strong class="important">How to play:</strong> Help <strong>Wei</strong> and <strong>Pan</strong> grow up, then help <strong>Wei@UChicago</strong> and <strong>Pan@CUHK</strong> find each other!
     </p>
     <hr>
     <p>
-    <strong class="important">Note:</strong> This site is the official version of 2048. You can play it on your phone via <a href="http://git.io/2048">http://git.io/2048.</a> All other apps or sites are derivatives or fakes, and should be used with caution.
-    </p>
-    <hr>
-    <p>
-    Created by <a href="http://gabrielecirulli.com" target="_blank">Gabriele Cirulli.</a> Based on <a href="https://itunes.apple.com/us/app/1024!/id823499224" target="_blank">1024 by Veewo Studio</a> and conceptually similar to <a href="http://asherv.com/threes/" target="_blank">Threes by Asher Vollmer.</a>
+    Created by Xingang Pan.
     </p>
   </div>
 

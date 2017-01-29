@@ -142,31 +142,61 @@ HTMLActuator.prototype.clearMessage = function () {
   this.messageContainer.classList.remove("game-over");
 };
 
-var content = "letter content lalalalalalalalaaaaaaa.  bbbbbbbbbbbbbbbb cccccccccccccc dddddddddddd eeeeeeeeee ffffffffffff gggggggggg hhhhhhhh";
+var content1 = "Dear 湾, ";
+var content2 = "Happy birthday! Hope that this website brings happyness to you. In the past two and a half years, we experienced many difficulties and shared more happyness. Thanks a lot for the beautiful experience of having you around me. It is you that give me the reason and courage to be a better man. ";
+var content3 = "Finding someone to spend life with is not easy. But after going through so much, I believe that you are the right one. You have your own life and choice. I'll wait till you have your answer. ";
+var content4 = "Again, happy birthday! And I hope fulfilling and rosy your new 2017 will be! ";
+var content5 = "Love from, ";
+var content6 = "棒棒 ";
 var count = 0;
 var progress = 1;
-var ele = document.getElementById("letter");
+var ele1 = document.getElementById("letter1");
+var ele2 = document.getElementById("letter2");
+var ele3 = document.getElementById("letter3");
+var ele4 = document.getElementById("letter4");
+var ele5 = document.getElementById("letter5");
+var ele6 = document.getElementById("letter6");
 
 HTMLActuator.prototype.showLetter = function () {
   var self = this;
   this.clearMessage();
   this.letterContainer.classList.add("game-won");
-  requestAnimationFrame(Letter);
+  requestAnimationFrame(Letter1);
 };
 
-Letter = function () {
+Letter1 = function () {
   count += 1;
-  if (count >= 8) {
+  if (count >= 6) {
     progress += 1;
     count = 0;
   }
-  ele.innerHTML = content.substr(0,progress);
-  if (progress < content.length) {
-    requestAnimationFrame(Letter);
+  if (progress < content1.length) {
+    ele1.innerHTML = content1.substr(0,progress);
+	ele2.innerHTML = " ";
+	ele3.innerHTML = " ";
+	ele4.innerHTML = " ";
+	ele5.innerHTML = " ";
+	ele6.innerHTML = " ";
+  } else if (progress < content1.length + content2.length) {
+    ele2.innerHTML = content2.substr(0,progress - content1.length);
+  } else if (progress < content1.length + content2.length + content3.length) {
+    ele3.innerHTML = content3.substr(0,progress - content1.length - content2.length);
+  } else if (progress < content1.length + content2.length + content3.length + content4.length) {
+    ele4.innerHTML = content4.substr(0,progress - content1.length - content2.length - content3.length);
+  } else if (progress < content1.length + content2.length + content3.length + content4.length + content5.length) {
+    ele5.innerHTML = content5.substr(0,progress - content1.length - content2.length - content3.length - content4.length);
+  } else {
+    ele6.innerHTML = content6.substr(0,progress - content1.length - content2.length - content3.length - content4.length - content5.length);
+  }
+
+  if (progress < content1.length + content2.length + content3.length + content4.length + content5.length + content6.length) {
+    requestAnimationFrame(Letter1);
   }
 };
 
 HTMLActuator.prototype.clearLetter = function () {
   // IE only takes one value to remove at a time.
   this.letterContainer.classList.remove("game-won");
+  count = 0;
+  progress = 1;
 };
