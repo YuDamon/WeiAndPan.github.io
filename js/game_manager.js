@@ -275,7 +275,9 @@ GameManager.prototype.tileMatchesAvailable = function () {
 
           var other  = self.grid.cellContent(cell);
 
-          if (other && other.value === tile.value && other.who === tile.who && other.value <= 16) {
+          if (other && other.value === tile.value && other.who === tile.who === "Wei" && this.count % 2 === 0 && other.value <= 16) {
+            return true; // These two tiles can be merged
+          } else if (other && other.value === tile.value && other.who === tile.who === "Pan" && this.count % 2 === 1 && other.value <= 16) {
             return true; // These two tiles can be merged
           } else if (other && other.value === tile.value && tile.value === 32 && other.who != tile.who ) {
             return true;
